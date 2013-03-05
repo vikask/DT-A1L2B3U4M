@@ -1,0 +1,14 @@
+<% provide(:title, 'Home') %>
+<% if signed_in? %>
+    <p>Welcome</p>
+<% else %>
+    <div class="center hero-unit">
+        <h2>Welcome to the Album App</h2>
+      <h2>
+        This is the home page.
+      </h2>
+      <%= link_to "Sign Up now!", new_user_registration_path, class: "btn btn-large btn-primary" %>
+    </div>
+<% end %>
+
+

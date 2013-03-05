@@ -1,0 +1,22 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Album", root_path, id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <% if current_user %>
+              <li><%= render :template => "application/logged_in_menu"%></li>
+          <% else %>
+              <li>
+                <%= link_to "Sign up", new_user_registration_path %>
+              </li>
+              <li>
+                <%= render :template => "application/sign_in_form" %>
+              </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
