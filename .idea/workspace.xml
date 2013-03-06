@@ -236,7 +236,7 @@
       <file leaf-file-name="index.haml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/paintings/index.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="105" selection-end="105" vertical-scroll-proportion="0.11494253">
+            <state line="15" column="28" selection-start="448" selection-end="448" vertical-scroll-proportion="0.3448276">
               <folding />
             </state>
           </provider>
@@ -1005,7 +1005,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/paintings/index.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="105" selection-end="105" vertical-scroll-proportion="0.11494253">
+        <state line="15" column="28" selection-start="448" selection-end="448" vertical-scroll-proportion="0.3448276">
           <folding />
         </state>
       </provider>
