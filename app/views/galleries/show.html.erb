@@ -1,0 +1,29 @@
+<div style="margin-top:20px;">
+    <h2> Gallery</h2>
+    <div class="row">
+      <div class="span11">
+        <% title @gallery.name %>
+
+        <div id="paintings">
+          <% for painting in @gallery.paintings %>
+            <div class="painting">
+              <%= image_tag painting.image_url(:thumb) if painting.image? %>
+              <div class="name"><%= painting.name %></div>
+              <div class="actions">
+                <%= link_to "edit", edit_painting_path(painting) %> |
+                <%= link_to "remove", painting, :confirm => 'Are you sure?', :method => :delete %>
+              </div>
+            </div>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+
+        <p>
+          <%= form_for Painting.new do |f| %>
+              <%= f.label :image, "Upload Paintings:" %>
+              <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+</div>

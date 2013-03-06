@@ -11,6 +11,7 @@
     %ul.dropdown-menu{:style => "padding: 15px;"}
       %li
         = link_to "Account",  edit_user_registration_path()
+        = link_to "Gallery", galleries_path
       %li.divider-horizontal
       %li
         = link_to "Sign Out", destroy_user_session_path(), :method => :delete

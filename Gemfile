@@ -22,7 +22,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', :git => "git://github.com/indirect/jquery-rails.git"
 
 gem "bootstrap-sass", ">= 2.1.1.0"
 
@@ -60,6 +60,9 @@ gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
 gem "best_in_place", :git => 'git://github.com/proton/best_in_place.git'
+
+gem "rmagick"
+
 
 # To use ActiveModel has_secure_password
  #gem 'bcrypt-ruby', '~> 3.0.0'

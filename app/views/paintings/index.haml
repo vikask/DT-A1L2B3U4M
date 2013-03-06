@@ -1,0 +1,16 @@
+%h1 Painting Gallery
+#paintings
+  = render @paintings
+.clear
+= form_for Painting.new do |f|
+  .fileupload
+    %span.btn.btn-success.fileinput-button.calign.w-100
+      %i.icon-plus.icon-white
+        %span.text-orange
+          = f.label :image, "Add Images"
+          = f.file_field :image, multiple: true, name: "painting[image]"
+%script#template-upload{:type => "text/x-tmpl"}
+  .upload
+    {%=o.name%}
+    .progress
+      .bar{:style => "width: 0%"}

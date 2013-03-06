@@ -1,5 +1,10 @@
 WeddingAlbum::Application.routes.draw do
 
+  resources :paintings
+
+
+  resources :galleries
+
   devise_for :users, :controller => {:registrations => 'registrations', :sessions => 'users/sessions'}
 
   resource :users do
@@ -9,12 +14,13 @@ WeddingAlbum::Application.routes.draw do
   resources :authentications, :only =>[:create, :destroy]
 
   authenticated :user do
-    root :to => 'static_pages#home'
+    root :to => 'paintings#index'
   end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  root :to => "static_pages#home"
+  #root :to => "static_pages#home"
+  root :to => 'paintings#index'
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
 
