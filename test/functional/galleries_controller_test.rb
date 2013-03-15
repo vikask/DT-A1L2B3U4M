@@ -18,7 +18,7 @@ class GalleriesControllerTest < ActionController::TestCase
 
   test "should create gallery" do
     assert_difference('Gallery.count') do
-      post :create, gallery: { Gallery: @gallery.Gallery, description: @gallery.description, name: @gallery.name }
+      post :create, gallery: { cover: @gallery.cover, description: @gallery.description, name: @gallery.name }
     end
 
     assert_redirected_to gallery_path(assigns(:gallery))
@@ -35,7 +35,7 @@ class GalleriesControllerTest < ActionController::TestCase
   end
 
   test "should update gallery" do
-    put :update, id: @gallery, gallery: { Gallery: @gallery.Gallery, description: @gallery.description, name: @gallery.name }
+    put :update, id: @gallery, gallery: { cover: @gallery.cover, description: @gallery.description, name: @gallery.name }
     assert_redirected_to gallery_path(assigns(:gallery))
   end
 

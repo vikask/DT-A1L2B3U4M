@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  Gallery: MyString
   name: MyString
   description: MyString
+  cover: 1
 
 two:
-  Gallery: MyString
   name: MyString
   description: MyString
+  cover: 1

@@ -22,7 +22,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails', :git => "git://github.com/indirect/jquery-rails.git"
+gem 'jquery-rails'
 
 gem "bootstrap-sass", ">= 2.1.1.0"
 
@@ -59,7 +59,7 @@ gem "less-rails"
 gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
-gem "best_in_place", :git => 'git://github.com/proton/best_in_place.git'
+gem "best_in_place"
 
 gem "rmagick"
 

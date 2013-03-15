@@ -1,10 +1,12 @@
 WeddingAlbum::Application.routes.draw do
 
-  resources :paintings
-
-
-  resources :galleries
-
+  resources :galleries do
+    resources :pictures do
+      collection do
+        post 'make_default'
+      end
+    end
+  end
   devise_for :users, :controller => {:registrations => 'registrations', :sessions => 'users/sessions'}
 
   resource :users do
@@ -14,13 +16,17 @@ WeddingAlbum::Application.routes.draw do
   resources :authentications, :only =>[:create, :destroy]
 
   authenticated :user do
-    root :to => 'paintings#index'
+    root :to => 'static_pages#home'
   end
+  resources :pictures
+  #match "/galleries/:gallery_id/pictures/:id/edit" => "pictures#edit"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  #root :to => "static_pages#home"
-  root :to => 'paintings#index'
+  root :to => "static_pages#home"
+
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
 
@@ -91,5 +97,5 @@ WeddingAlbum::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  #  match ':galleries/:gallery_id/pictures/:id/edit(.:format)' => "pictures#edit"
 end

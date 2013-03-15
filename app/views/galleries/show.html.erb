@@ -1,29 +1,111 @@
-<div style="margin-top:20px;">
-    <h2> Gallery</h2>
+
+<div class="row">
+  <input type="hidden" id="galleryID" value="<%= @gallery.id %>">
+  <h10>
+    <%= best_in_place @gallery, :name, :type => :input, :nil => "Your Album" %>
+  </h10>
+</div>
+
+<%= form_for [@gallery, @picture], :html => { :multipart => true, :id => "fileupload"  } do |f| %>
     <div class="row">
-      <div class="span11">
-        <% title @gallery.name %>
-
-        <div id="paintings">
-          <% for painting in @gallery.paintings %>
-            <div class="painting">
-              <%= image_tag painting.image_url(:thumb) if painting.image? %>
-              <div class="name"><%= painting.name %></div>
-              <div class="actions">
-                <%= link_to "edit", edit_painting_path(painting) %> |
-                <%= link_to "remove", painting, :confirm => 'Are you sure?', :method => :delete %>
-              </div>
-            </div>
-          <% end %>
-          <div class="clear"></div>
-        </div>
-
-        <p>
-          <%= form_for Painting.new do |f| %>
-              <%= f.label :image, "Upload Paintings:" %>
-              <%= f.file_field :image, multiple: true, name: "painting[image]" %>
-          <% end %>
-        </p>
+      <div class=" fileupload-buttonbar">
+        <div class="progressbar fileupload-progressbar nofade"><div style="width:0%;"></div></div>
+          <span class="btn btn-large fileinput-button" id="drop-files">
+            <i class="icon-plus"></i> Drop Images Here
+            <span><%= t('photos.add_files') %>...</span>
+            <%= f.file_field :image, :multiple => true %>
+          </span>
       </div>
     </div>
+    <br>
+    <div class="row">
+      <ul class="thumbnails files">
+        <% unless @pictures.empty? %>
+            <% @pictures.each do |pic| %>
+                <li class="span3" id="picture_<%= pic.id %>">
+                  <div class="thumbnail">
+                    <a href="<%= pic.image.url %>" target="_blank" rel="shadowbox[gallery];" title="<%= pic.description %>">
+                      <img src="<%= pic.image.thumb.url %>" alt="">
+                    </a>
+                    <div class="caption">
+                      <p style="text-align: center;">
+                        <td><span class="best_in_place" id="best_in_place_picture_description" target='_blank' data-url="/galleries/<%= @gallery.id %>/pictures/<%= pic.id %>" data-object="picture" data-attribute="description" data-type="input"> <%= pic.description %></span></td>
+                      <i class="icon-edit "></i>
+                        <a class="delete" confirm="Are you sure?" data-method="delete" href="/galleries/<%= @gallery.id %>/pictures/<%= pic.id %>" data-remote=true>
+                          <i class="icon-trash"></i>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+<script>
+    var fileUploadErrors = {
+        maxFileSize: 'File is too big',
+        minFileSize: 'File is too small',
+        acceptFileTypes: 'Filetype not allowed',
+        maxNumberOfFiles: 'Max number of files exceeded',
+        uploadedBytes: 'Uploaded bytes exceed file size',
+        emptyResult: 'Empty file upload result'
+    };
+
+    Shadowbox.init();
+    $(document).ready(function() {
+        /* Activating Best In Place */
+        jQuery(".best_in_place").best_in_place();
+    });
+
+</script>
+
+
+<script id="template-download" type="text/x-jquery-tmpl">
+    <script id="template-download" type="text/html">
+      {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+      <tr class="template-download nofade">
+        {% if (file.error) { %}
+        <td></td>
+        <td class="name">{%=file.name%}</td>
+        <td class="size">{%=o.formatFileSize(file.size)%}</td>
+        <td class="error" colspan="2"><span class="label important">Error</span> {%=fileUploadErrors[file.error] || file.error%}</td>
+        {% } else { %}
+        <td class="preview">{% if (file.thumbnail_url) { %}
+          <a href="{%=file.url%}" title="{%=file.name%}" target="_blank" rel="shadowbox[gallery]"><img src="{%=file.thumbnail_url%}"></a>
+          {% } %}</td>
+        <td class="name">
+          <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'shadowbox'%}">{%=file.name%}</a>
+        </td>
+        <td class="size">{%=o.formatFileSize(file.size)%}</td>
+        <td colspan="2"></td>
+        {% } %}
+        <td><span class="best_in_place" id="best_in_place_picture_title" data-url="/pictures/${id}" data-object="picture" data-attribute="title" data-type="input"> ${title}</span></td>
+        <td class="delete">
+          <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"><%= t('photos.template.delete') %></button>
+          <input type="checkbox" name="delete" value="1">
+        </td>
+      </tr>
+      {% } %}
+    </script>
+
+</script>
+
+
+
+<%= javascript_include_tag 'jquery.ui.widget.js' %>
+<%= javascript_include_tag 'jquery.iframe-transport.js' %>
+<%= javascript_include_tag 'jquery.fileupload.js' %>
+<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
+
+
+
+
+<div class="row">
+  <div class="form-actions">
+    <%= link_to 'Back', galleries_path, :class => 'btn btn-mini'  %>
+    <%= link_to 'Edit', edit_gallery_path(@gallery), :class => 'btn btn-mini' %>
+    <%= link_to 'Delete', gallery_path(@gallery), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-mini' %>
+  </div>
 </div>
