@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <%- model_class = @gallery.class -%>
+    <div class="page-header">
+      <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                       :default => "New #{model_class.model_name.human}") %></h1>
+    </div>
+  </div>
+  <div class="modal-body">
+
+    <%= render :partial => 'form' %>
+  </div>
+
+</div>
+
+<script>
+
+    $('#myModal').modal({
+        backdrop: true,
+        keyboard: true
+    }).css({
+                width: 'auto',
+                'margin-left': function () {
+                    return -($(this).width() / 2);
+                }
+            });
+</script>

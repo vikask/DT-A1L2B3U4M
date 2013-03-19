@@ -16,7 +16,7 @@ WeddingAlbum::Application.routes.draw do
   resources :authentications, :only =>[:create, :destroy]
 
   authenticated :user do
-    root :to => 'static_pages#home'
+    root :to => 'galleries#index'
   end
   resources :pictures
   #match "/galleries/:gallery_id/pictures/:id/edit" => "pictures#edit"
@@ -26,7 +26,8 @@ WeddingAlbum::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
   root :to => "static_pages#home"
-
+  match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/failure' => 'authentications#failure'
   match '/about', to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
 
@@ -40,9 +41,10 @@ WeddingAlbum::Application.routes.draw do
   match '/change_avatar/:provider' => 'avatars#change'
   match '/set_avatar/:provider_name' => 'avatars#set_avatar'
   match '/profile/:id' => 'profile#show'
+  match '/add_new_photos' => 'pictures#add_new_photos'
 
-  match '/auth/:provider/callback' => 'authentications#create'
-  match '/auth/failure' => 'authentications#failure'
+  match '/galleries/:gallery_id/pictures/new' => 'galleries#new'
+
 
   #match '/auth/facebook/logout' => 'application#facebook_logout', :as => :facebook_logout
   # Sample of regular route:

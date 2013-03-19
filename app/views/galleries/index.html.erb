@@ -15,14 +15,11 @@
             <% end %>
             <div class="caption">
               <p style="text-align: center;">
-                <a href="<%= edit_gallery_path(:id => gallery.id) %>" class="btn btn-mini">
-                  <i class="icon-edit "></i>
-                  Edit
-                </a>
-                <a class="delete" confirm="Вы уверены?" data-method="delete" href="<%= gallery_path(:id => gallery.id) %>" data-remote=true>
+                <%= best_in_place gallery, :name, :type => :input, :nil => "Your Album" %>
+                <i class="icon-edit "></i>
+                    <a class="delete" data-confirm="Are you sure?"  data-method="delete" href="/galleries/<%= gallery.id %>"  data-remote= true >
                   <i class="icon-trash"></i>
-
-                </a>
+              </a>
               </p>
             </div>
           </div>
@@ -32,3 +29,10 @@
 
   <%= link_to 'New', new_gallery_path, :class => 'btn btn-mini' %>
 </div>
+
+<script>
+    $(document).ready(function() {
+        /* Activating Best In Place */
+        jQuery(".best_in_place").best_in_place();
+    });
+</script>

@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
+
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :current_password, :picture, :slug, :public
   attr_accessor :current_password
   has_attached_file :picture, :style => { :large => "100x100", :thumb => "40x40"}
@@ -38,7 +39,14 @@ class User < ActiveRecord::Base
     provider = omniauth['provider']
     self.email = omniauth['info']['email'] if email.blank?
     self.name = omniauth['info']['name']
-    authentication.build(:provider => provider, :uid => omniauth['uid'], :token => omniauth['credentials']['token'] ? omniauth['credential']['token'] : "")
+    authentications.build(:provider => provider, :uid => omniauth['uid'], :token => omniauth['credentials']['token'] ? omniauth['credentials']['token'] : "")
+  end
+
+  def set_uuid_pwd
+    pwd = UUIDTools::UUID.timestamp_create
+    self.password = pwd
+    self.password_confirmation = pwd
+    nil
   end
 
   def self.create_with_omniauth(auth)
@@ -46,6 +54,14 @@ class User < ActiveRecord::Base
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.name = auth["info"]["name"]
+    end
+  end
+
+  def password_require?
+    if self.new_record?
+      authentications.empty?
+    else
+      true
     end
   end
 

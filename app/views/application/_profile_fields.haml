@@ -9,9 +9,9 @@
   %span
     = form_for @user, :url => change_picture_path, :validate => true, :html => { :multipart => true, :id => "fileupload"  } do |f|
       %span.pull-left
-        %ul.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
+        -#%ul.files{"data-target" => "#modal-gallery", "data-toggle" => "modal-gallery"}
         / The table listing the files available for upload/download
-        = render 'application/file_upload', :id => "fileupload", :t_up => 'template-upload', :t_down => 'template-download'
+        -#= render 'application/file_upload', :id => "fileupload", :t_up => 'template-upload', :t_down => 'template-download'
         %span.btn.btn-success.fileinput-button.calign.w-100
           %i.icon-plus.icon-white
           -if @user.picture.present?

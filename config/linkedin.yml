@@ -1,0 +1,12 @@
+development:
+  token: 'v0oiorrcips2'
+  secret: 'nlfVJOAOfwL504JY'
+staging:
+  token: 'icwyjiole6s2'
+  secret: 'r0U3uwOGlhKxieg9'
+test:
+  token: ''
+  secret: ''
+production:
+  token: ''
+  secret: ''

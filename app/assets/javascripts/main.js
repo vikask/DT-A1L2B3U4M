@@ -62,18 +62,16 @@ $(function () {
                 (file.error ? '<div class="name"></div>' +
                     '<div class="size"></div><div class="error" ></div>' :
                       '<div class="thumbnail">' +
-                        '<a href="' + file.url +'" rel="shadowbox[gallery]" class="picture_' + file.id + '" title="<%= pic.description %>">' +
+                        '<a class="image-thumbnail" title="" href="' + file.url + '" rel="shadowbox[gallery]">' +
                           '<img src="" alt="">') +
                         '</a>' +
                         '<div class="caption">' +
                           '<p style="text-align: center;">' +
-                            '<a href="" class="btn btn-mini btn-show" style="margin-right: 4px;">' +
-                              '<i class="icon-edit "></i>' +
-                              'Edit' +
+                            '<td><span class="best_in_place btn-show" id="best_in_place_picture_description" data-url="" data-object="picture" data-attribute="description" data-type="input"><td class="description"></td> </span></td>' +
+                                '<i class="icon-edit "></i>' +
                             '</a>' +
-                            '<a class="btn btn-mini btn-delete" confirm="Are you sure?" data-remote=true data-method="delete" href="" >' +
-                              '<i class="icon-trash"></i>' +
-                              'Delete' +
+                            '<a class="btn-delete" data-confirm="Are you sure?" data-method="delete"  href="" data-remote=true>' +
+                                '<i class="icon-trash"></i>' +
                             '</a>' +
                           '</p>' +
                         '</div>' +
@@ -92,9 +90,14 @@ $(function () {
                 row.find('.btn-delete')
                     .attr('href', '/galleries/' + $("#galleryID").val() + '/pictures/' + file.picture_id);
                 row.find('.btn-show')
-                    .attr('href', '/galleries/' + $("#galleryID").val() + '/pictures/' + file.picture_id + '/edit');
-            }            
+                    .attr('data-url', '/galleries/' + $("#galleryID").val() + '/pictures/' + file.picture_id);
+                row.find('.description')
+                    .attr('td', file.description);
+                row.find('.image-thumbnail')
+                    .attr('class', "picture_"+ file.picture_id);
+            }
             rows = rows.add(row);
+
         });
         return rows;
     }

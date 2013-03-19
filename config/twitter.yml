@@ -1,0 +1,20 @@
+development:
+  consumer_key: 'wDZjDtO9CcBVSGjTlOeSoQ'
+  consumer_secret: 'w5QgB6GwTTiOwqAkPR3yu0DZKcvBMKZRWDsmS5Spsw'
+  oauth_token: '949413817-CyHZGgRgypHMUvJ1cmJxpqMG24xKZls6vPKtdfxQ'
+  oauth_token_secret: 'eZGkDUfAeD489Ek82HBX1nyaKM6VpzzxBQzLDdWfvg'
+staging:
+  consumer_key: 'UMsAqR0I2fUbt8PPnh8QQ'
+  consumer_secret: 'X5ppLWUcFgxsVofFG6FPIcu062wC9cdiIoFm8xCaxY'
+  oauth_token: '949413817-dn2xvzKLw0cAgVRXZopGwUrvnwcOgVtIzjGAtLRp'
+  oauth_token_secret: 'yFaE3LGaRv9kdwtUbfQUOugdXDTtsUPPr3imCs0VB0'
+test:
+  consumer_key: ''
+  consumer_secret: ''
+  oauth_token: ''
+  oauth_token_secret: ''
+production:
+  consumer_key: ''
+  consumer_secret: ''
+  oauth_token: ''
+  oauth_token_secret: ''

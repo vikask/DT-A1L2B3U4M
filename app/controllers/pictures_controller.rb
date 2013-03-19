@@ -51,6 +51,7 @@ class PicturesController < ApplicationController
   # POST /pictures
   # POST /pictures.json
   def create
+    temp = 0
     p_attr = params[:picture]
     p_attr[:image] = params[:picture][:image].first if params[:picture][:image].class == Array
 
@@ -58,6 +59,11 @@ class PicturesController < ApplicationController
     @picture = @gallery.pictures.build(p_attr)
 
     if @picture.save
+      Rails.logger.debug"************TestnewID #{@picture.id}****************"
+      @gallery.cover = @picture.id
+      @gallery.save
+
+      Rails.logger.debug"************Test3 #{@picture.id}****************"
       respond_to do |format|
         format.html {
           render :json => [@picture.to_jq_upload].to_json,
@@ -97,7 +103,29 @@ class PicturesController < ApplicationController
   def destroy
     @gallery = Gallery.find(params[:gallery_id])
     @picture = @gallery.pictures.find(params[:id])
-    @picture.destroy
+
+    Rails.logger.debug"************test12 #{@gallery.cover}****************"
+    Rails.logger.debug"************test13 #{params[:id]}****************"
+
+
+    if (@gallery.cover.to_i == params[:id].to_i)
+      Rails.logger.debug"************test14 #{@gallery.cover}****************"
+      Rails.logger.debug"************test15 #{params[:id]}****************"
+
+      @picture.destroy
+
+      @pictures = @gallery.pictures.last
+      #Rails.logger.debug"************test16 #{@pictures.id}****************"
+      if !@pictures.id.nil? or !@pictures.id.empty?
+        Rails.logger.debug"************test17 #{@pictures.id}****************"
+        @gallery.cover = @pictures.id
+        @gallery.save
+      end
+    else
+      @picture.destroy
+    end
+
+
 
     respond_to do |format|
       format.html { redirect_to gallery_pictures_url }
