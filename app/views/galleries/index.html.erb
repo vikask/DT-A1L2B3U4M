@@ -14,7 +14,7 @@
                 </a>
             <% end %>
             <div class="caption">
-              <p style="text-align: center;">
+              <p style="text-align: center;font-size: 15px; font-weight: bold;">
                 <%= best_in_place gallery, :name, :type => :input, :nil => "Your Album" %>
                 <i class="icon-edit "></i>
                     <a class="delete" data-confirm="Are you sure?"  data-method="delete" href="/galleries/<%= gallery.id %>"  data-remote= true >
@@ -27,7 +27,7 @@
     <% end %>
   </ul>
 
-  <%= link_to 'New', new_gallery_path, :class => 'btn btn-mini' %>
+  <%= link_to 'New', new_gallery_path, :class => 'btn' %>
 </div>
 
 <script>

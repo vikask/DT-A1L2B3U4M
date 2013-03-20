@@ -15,7 +15,9 @@
  *= require shadowbox
  */
 
-
+#input-width {
+    width: 288px;
+}
 
 #upload_photo {
 

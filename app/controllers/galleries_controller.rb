@@ -29,7 +29,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @gallery }
+      format.json { render :layout => false }
     end
   end
 

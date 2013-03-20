@@ -2,7 +2,7 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+      <%= f.text_field :name, :class => 'text_field', :require => true, :autofocus => true %>
     </div>
   </div>
   <div class="control-group">
@@ -12,11 +12,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <%= f.submit nil, :class => 'btn btn-mini btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                galleries_path, :class => 'btn btn-mini' %>
+    <%= f.submit nil, :class => 'btn btn-large btn-primary' %>
+    <!--<a class="close btn" data-dismiss="modal">Cancel</a>-->
+    <!--<a href="/galleries" class="btn close cancel" data-dismiss="modal">Cancel</a>-->
+    <%= link_to "Cancel", galleries_path, :class=>"btn btn-large btn-primary"  %>
   </div>
-
 <% end %>
 
 

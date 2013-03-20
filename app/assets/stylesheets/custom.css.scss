@@ -1,7 +1,11 @@
 @import "bootstrap";
 
 /* universal */
-
+.page-header {
+  border-bottom: 1px solid #EEEEEE;
+  margin: -18px 0 -10px;
+  padding-bottom: 9px;
+}
 
 .btn-radius  {
   border-radius: 20px 20px 20px 20px;
