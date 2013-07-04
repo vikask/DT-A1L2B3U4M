@@ -37,17 +37,17 @@
 
 #drop-files {
     background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6) !important;
-    width: 934px;
+    width: 950px;
     height: 35px;
     background: rgba(0,0,0,0.2);
     border-radius: 10px 10px 10px 10px;
-    border: 4px dashed rgba(0,0,0,0.2);
+    border: 1px dashed #983A7E;
     padding: 14px 0 0;
     text-align: center;
     font-size: 1em;
     float: left;
     font-weight: bold;
-    margin: 0 20px 20px 0;
+    margin: -5px 37px 16px 14px;
 }
 
 
