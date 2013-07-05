@@ -2,7 +2,10 @@ class GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.json
   def index
-    @galleries = Gallery.all
+    @user = current_user
+    Rails.logger.debug"************Testing#{@user.inspect}"
+    @users = User.find_by_id(@user)
+    @galleries = @user.galleries
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,9 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.json
   def show
-    @gallery = Gallery.find(params[:id])
+    @user = current_user
+    @gallery = current_user.galleries.find(params[:id])
+    Rails.logger.debug"************Testing ga#{@gallery.inspect}"
     @picture = @gallery.pictures.build
     @pictures = Picture.find(:all, :conditions  => [ 'gallery_id = ?', @gallery.id ])
     respond_to do |format|
@@ -25,12 +30,9 @@ class GalleriesController < ApplicationController
   # GET /galleries/new
   # GET /galleries/new.json
   def new
-    @gallery = Gallery.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @gallery }
-    end
+    @user = current_user
+    @gallery = Gallery.new(:user_id => @user.id)
+    render :layout => false
   end
 
   # GET /galleries/1/edit
@@ -41,8 +43,8 @@ class GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.json
   def create
-    @gallery = Gallery.new(params[:gallery])
-
+    @gallery = current_user.galleries.build(params[:gallery])
+    Rails.logger.debug"************Testing Create#{@gallery.inspect}"
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
@@ -57,7 +59,8 @@ class GalleriesController < ApplicationController
   # PUT /galleries/1
   # PUT /galleries/1.json
   def update
-    @gallery = Gallery.find(params[:id])
+
+    @gallery = current_user.galleries.find(params[:id])
 
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
@@ -73,7 +76,7 @@ class GalleriesController < ApplicationController
   # DELETE /galleries/1
   # DELETE /galleries/1.json
   def destroy
-    @gallery = Gallery.find(params[:id])
+    @gallery = current_user.galleries.find(params[:id])
     @gallery.destroy
     respond_to do |format|
       format.html { redirect_to gallery_url }

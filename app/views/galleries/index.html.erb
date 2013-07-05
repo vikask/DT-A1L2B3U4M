@@ -26,13 +26,19 @@
         </li>
     <% end %>
   </ul>
-
-  <%= link_to 'New', new_gallery_path, :class => 'btn btn-mini' %>
+  <a href="/new_gallery" role="button" id="new_gallery" class="btn btn-info">New</a>
 </div>
 
+<div id="myModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <script>
     $(document).ready(function() {
         /* Activating Best In Place */
         jQuery(".best_in_place").best_in_place();
+        $('#new_gallery').click(function() {
+            $("#myModal").load(this.href,function(data) {
+                $(this).modal("show");
+            });
+            return false;
+        });
     });
 </script>

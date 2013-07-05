@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
 
   has_many :authentications
+  has_many :galleries, :dependent => :destroy
   has_one :avatar
 
   def apply_omniauth(omniauth)

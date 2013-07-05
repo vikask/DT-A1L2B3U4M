@@ -19,7 +19,7 @@ WeddingAlbum::Application.routes.draw do
     root :to => 'galleries#index'
   end
   resources :pictures
-  #match "/galleries/:gallery_id/pictures/:id/edit" => "pictures#edit"
+  match "/new_gallery" => "galleries#new"
 
 
 
